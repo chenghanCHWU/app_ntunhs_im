@@ -1,18 +1,28 @@
 package com.example.guess_number
 
+
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
+import android.os.Handler
+import android.os.Looper
 import android.util.Log
+import android.view.View
 import android.widget.Button
 import android.widget.EditText
 import android.widget.TextView
+import android.widget.Toast
 import java.util.Random
 
 class MainActivity : AppCompatActivity() {
+    val TAG:String = MainActivity::class.java.simpleName
+    private lateinit var handler: Handler
     override fun onCreate(savedInstanceState: Bundle?) {
+
+
 
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_main)
+        handler = Handler(Looper.getMainLooper())
 
         val textView = findViewById<TextView>(R.id.textView)
         val guess_button = findViewById<Button>(R.id.Guess_button)
@@ -26,8 +36,12 @@ class MainActivity : AppCompatActivity() {
 
 
         guess_button.setOnClickListener{
+
+            handler.postDelayed({
+                Toast.makeText(this, "5秒後的操作執行了！", Toast.LENGTH_SHORT).show()
+            }, 5000)
             validate_num=editText.text.toString().toInt()-secret
-            var ans_str: String="你猜對了喔"
+            var ans_str: String= getString(R.string.yes_you_got_the_answer)
 
             if(validate_num>0){
                 maximum=editText.text.toString().toInt()
@@ -47,4 +61,10 @@ class MainActivity : AppCompatActivity() {
             textView.text=minimum.toString()+"-"+maximum.toString()
         }
     }
+
+    override fun onDestroy() {
+        super.onDestroy()
+        handler.removeCallbacksAndMessages(null)
+    }
+
 }

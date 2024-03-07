@@ -1,0 +1,8 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <string name="yes_you_got_the_answer">你猜對了！！</string>
+    <string name="app_name">終極密碼</string>
+    <string name="reset">重置結果</string>
+    <string name="guess">猜數字</string>
+    <string name="please_enter_number">請輸入一個數字</string>
+</resources>
